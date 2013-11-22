@@ -53,7 +53,7 @@ header('Location: login.php');
 
     function initialize() {
         var myOptions = {
-            zoom: 11,
+            zoom: 15,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
@@ -231,7 +231,7 @@ header('Location: login.php');
                     <h4>Fecha</h4>
                     </div>
                     <div class="form-group">
-                    <input type="text" class="form-control" placeholder="mm/dd/yyyy" name="fecha">
+                    <input type="text" class="form-control" placeholder="yyyy/mm/dd" name="fecha">
                     </div>
 
                 </div>
