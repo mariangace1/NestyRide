@@ -70,7 +70,7 @@
       <hr>
 
       <footer>
-        <p>© Company 2013</p>
+        <p>© ITESM 2013</p>
       </footer>
     </div> <!-- /container -->
 
