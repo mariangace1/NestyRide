@@ -103,8 +103,8 @@ $rides = doitallandgivememyrides($id);
 				  <?php foreach($rides as $key => $row): ?>
 				<tr>
                   <td><?php echo $row['id']; ?></td>
-                  <td><?php echo $row['usuario']; ?></td>
                   <td><?php echo $row['rol']; ?></td>
+                  <td><?php echo $row['usuario']; ?></td>
                   <td><?php echo $row['tiempo']; ?></td>
                   
                 </tr>
