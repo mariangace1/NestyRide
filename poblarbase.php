@@ -1,23 +1,33 @@
 <?php
-        // Include database connection settings
-       include('config.inc');
+// Include database connection settings
+include('config.inc');
 
-              	$miSentenciaSQL = "INSERT INTO Entrada (usuario, rol, origenx, origeny, destinox, destinoy,tiempo, lugares) VALUES ('".$_POST["username"]."','".$_POST["rol"]."','".$_POST["ox"]."','".$_POST["oy"]."','".$_POST["dx"]."','".$_POST["dy"]."','".$_POST["fecha"]." ".$_POST["hora"]."','".$_POST["lugares"]."')";
-        			//$miSentenciaSQL = "INSERT INTO image (image) VALUES ('".$path."')";
-        			$resultado = mysql_query($miSentenciaSQL); 
-        			//echo $miSentenciaSQL;
+$miSentenciaSQL = "INSERT INTO Entrada (usuario, rol, origenx, origeny, destinox, destinoy,tiempo, lugares) VALUES ('".$_POST["username"]."','".$_POST["rol"]."','".$_POST["ox"]."','".$_POST["oy"]."','".$_POST["dx"]."','".$_POST["dy"]."','".$_POST["fecha"]." ".$_POST["hora"]."','".$_POST["lugares"]."')";
 
-        			if (!$resultado){
-        			 echo "Error al registrar el empleado";
-        			 echo $miSentenciaSQL;
-        			}
-        			else
-        			{
-        			echo "
+if ($_POST["rol"] == "conductor"){
+	for ($i = 0; $i <$_POST["lugares"] ; $i++){
+		$resultado = mysql_query($miSentenciaSQL); 
+	}
+	
+}else{
+	$resultado = mysql_query($miSentenciaSQL); 
+}
 
-              Ruta insertada con &eacute;xito";
-        			} 
+	
+
+if (!$resultado){
+ echo "Error al registrar la ruta"; exit;
+ echo $miSentenciaSQL;
+}
+else
+{
+	//echo "Ruta insertada con &eacute;xito";
+} 
+
+$guardado_ok = true;
+
+include('bienvenido.php');
+
               
 ?>
 
-alta

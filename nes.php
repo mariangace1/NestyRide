@@ -1,55 +1,156 @@
 <?php 
 
-//~ echo 'hola';
-
 include('config.inc');
 
-//~ $sql = "select * from entrada";
-//~ $r = query($sql);
-//~ print_r($r);exit;
+$sql = "select * from entrada";
+$data = query($sql);
 
-$pas = array();
 
-$pas['origenx'] = 2;
-$pas['origeny'] = 2;
+$sol = inicializar_solucion();
 
-$pas['destinox'] = 6;
-$pas['destinoy'] = 2.00001;
 
-$con = array();
+print_r($sol);
+$sol = recocido_simulado($sol);
+print_r($sol);exit;
 
-$con['origenx'] = 1;
-$con['origeny'] = 1;
 
-$con['destinox'] = 5;
-$con['destinoy'] = 1.00001;
-
-echo costo_distancia($pas,$con);
-
-function costo_distancia($pas,$con){
+function inicializar_solucion(){
 	
-	function proyeccion($px,$py,$l1x,$l1y,$l2x,$l2y){
-		$px-=$l1x;
-		$py-=$l1y;
-		
-		$r = proyectar($px,$py,$l2x-$l1x,$l2y-$l1y);
-		
-		
-		$r['x']+=$l1x;
-		$r['y']+=$l1y;
-		
-		return($r);
+	$sol = array();
+	
+	//cargar datos
+	
+	$sql = "select * from entrada where rol = 'pasajero'";
+	$result = query($sql);
+	
+	$sol['pasajeros'] = array_keys($result);
+	
+	$sql = "select * from entrada where rol = 'conductor'";
+	$result = query($sql);
+	
+	$sol['conductores'] = array_keys($result);
+	
+	$sol['parejas'] = array();
+	
+	//parejas al azar
+	
+	shuffle($sol['pasajeros']);
+	shuffle($sol['conductores']);
+	
+	$num_pasajeros = count($sol['pasajeros']);
+	$num_conductores = count( $sol['conductores']);
+	
+	$mayor = "";
+	
+	if ($num_pasajeros > $num_conductores){
+		$mayor = "pasajeros";
+	}else{
+		$mayor = "conductores";
 	}
 	
-	function proyectar($px,$py,$vx,$vy){
+	$sol['mayor'] = $mayor;
+	
+	$min = min( count($sol['pasajeros']), count( $sol['conductores']) );
+	
+	for ($i = 0; $i <$min ; $i++){
+		$sol['parejas'][] = array('p'=>$sol['pasajeros'][$i],'c'=>$sol['conductores'][$i]);
+		unset($sol['pasajeros'][$i]);
+		unset($sol['conductores'][$i]);
+	}
+	
+	return $sol;
+}
+
+function nueva_solucion($solucion){
+	
+	if ($solucion['mayor'] && false){
+		//swap con los de afuera
+		$pareja_random = array_rand($solucion['parejas']);
+		$afuera_random = array_rand($solucion[$solucion['mayor']]);
+		
+		$temp = 0;
+		$temp = $solucion['parejas'][$pareja_random][$solucion['mayor'][0]]; 
+		$solucion['parejas'][$pareja_random][$solucion['mayor'][0]] = $solucion[$solucion['mayor']][$afuera_random]; 
+		$solucion[$solucion['mayor']][$afuera_random] = $temp; 
+		
+	}else{
+		
+		//swap parejas
+		$randoms = array_rand($solucion['parejas'],2);
+		$temp = 0;
+		$temp = $solucion['parejas'][$randoms[0]]['p']; 
+		$solucion['parejas'][$randoms[0]]['p'] = $solucion['parejas'][$randoms[1]]['p']; 
+		$solucion['parejas'][$randoms[1]]['p'] = $temp; 
+		
+	}
+	
+	return $solucion;
+		
+	
+}
+
+function costo_solucion($solucion){
+	$costo = 0;
+	
+	foreach ($solucion['parejas'] as $key => $val){
+		global $data;
+		$costo += costo($data[$val['p']] , $data[$val['c']] ); 
+	}
+	return $costo;		
+}
+
+function recocido_simulado($solucion,$T=10000000.0,$cool=0.95){
+	
+	while ($T>0.1){
+		//generate new solution
+		$solucion2 = nueva_solucion($solucion);
+		
+		// Calculate the current cost and the new cost
+		$ea=costo_solucion($solucion);
+		$eb=costo_solucion($solucion2);
+		$p=pow(exp(1),(-$eb-$ea)/$T);
+		
+		// Is it better, or does it make the probability cutoff?
+		
+		if ($eb<$ea || mt_rand() / mt_getrandmax() < $p){
+			$solucion = $solucion2;
+		}
+		
+		echo "{$ea}
+		";
+		
+		// Decrease the temperature
+		$T=$T*$cool;
+		
+	}
+	
+	return $solucion;
+}
+
+function proyeccion($px,$py,$l1x,$l1y,$l2x,$l2y){
+	$px-=$l1x;
+	$py-=$l1y;
+	
+	$r = proyectar($px,$py,$l2x-$l1x,$l2y-$l1y);
+	
+	
+	$r['x']+=$l1x;
+	$r['y']+=$l1y;
+	
+	return($r);
+}
+
+function proyectar($px,$py,$vx,$vy){
 		$k = ($px*$vx + $py*$vy)/($vx*$vx+$vy*$vy);
 		
 		return array('x'=>$k*$vx , 'y'=>$k*$vy);
 	}
 	
-	function distancia($ax,$ay,$bx,$by){
+function distancia($ax,$ay,$bx,$by){
 		return sqrt( pow($ax-$bx,2) + pow($ay-$by,2) ); 
 	}
+
+function costo_distancia($pas,$con){
 	
 	$d = 0;
 	
@@ -93,8 +194,22 @@ function costo_distancia($pas,$con){
 	return $d;
 }
 
-function costo_tiempo(){
+// la distancia en minutos
+function costo_tiempo($pas,$con){
 	
+	$date1 = new DateTime($pas['tiempo']);
+	$date2 = new DateTime($con['tiempo']);
+	
+	$interval = $date1->diff($date2);
+	
+	return $interval->i;
+}
+
+function costo($pas,$con){
+	$k_tiempo = 1;
+	$k_distancia = 1/0.001347342;
+	
+	return $k_distancia*costo_distancia($pas,$con) + $k_tiempo*costo_tiempo($pas,$con);
 }
 
 

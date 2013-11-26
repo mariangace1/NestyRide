@@ -159,7 +159,7 @@ header('Location: login.php');
   </head>
 
   <body style="">
-
+	
     <!-- Static navbar -->
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
@@ -183,8 +183,15 @@ header('Location: login.php');
         </div><!--/.nav-collapse -->
       </div>
     </div>
-
-
+    <?php if(isset($guardado_ok)): ?>
+		<div class="container">
+		<div class="alert alert-success">a</div>
+		 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		<div class="alert alert-success alert-dismissable">Petici&oacute;n guardada correctamente</div>
+	</div>
+	<?php endif; ?>
+    
+    
     <div class="container">
 
       <!-- Main component for a primary marketing message or call to action -->

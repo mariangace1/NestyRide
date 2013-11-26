@@ -16,7 +16,7 @@ function query($sql){
 	$resultado = mysql_query($sql);
 
 	while ($fila = mysql_fetch_assoc($resultado)) {
-		$salida[] = $fila;
+		$salida[$fila['id']] = $fila;
 	} 
 	return $salida;
 }
