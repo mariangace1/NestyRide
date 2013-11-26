@@ -36,7 +36,7 @@ $rides = doitallandgivememyrides($id);
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
 
-    <title>Static Top Navbar Example for Bootstrap</title>
+    <title>NestyRide</title>
     
     
     <!-- Bootstrap core CSS -->
@@ -61,11 +61,12 @@ $rides = doitallandgivememyrides($id);
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Nesty Ride</a>
+          <a class="navbar-brand" href="bienvenido.php">Nesty Ride</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
+            <li class="active"><a href="bienvenido.php">Home</a></li>
+            <li ><a href="ver_solicitudes.php">Mis solicitudes</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="../navbar-fixed-top/"><?php echo $_SESSION['username']; ?></a></li>

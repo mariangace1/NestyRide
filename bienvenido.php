@@ -18,7 +18,7 @@ header('Location: login.php');
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
 
-    <title>Static Top Navbar Example for Bootstrap</title>
+    <title>NestyRide</title>
     
     
     <!-- Bootstrap core CSS -->
@@ -174,7 +174,8 @@ header('Location: login.php');
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
+            <li class="active"><a href="bienvenido.php">Home</a></li>
+            <li ><a href="ver_solicitudes.php">Mis solicitudes</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="../navbar-fixed-top/"><?php echo $_SESSION['username']; ?></a></li>
@@ -196,9 +197,9 @@ header('Location: login.php');
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h1>Navbar example</h1>
+        
         <div id="map_canvas" style="width:1000px;height:600px;"></div>
-        <p>To see the difference between static and fixed top navbars, just scroll.</p>
+        
         <p>
           
             <form class="form-inline"  method="POST" action="poblarbase.php"  enctype="multipart/form-data">
