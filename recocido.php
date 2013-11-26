@@ -5,19 +5,38 @@ include('config.inc');
 $sql = "select * from entrada";
 $data = query($sql);
 
+function doitallandgivememyrides($id){
+	
+	global $data;
+	
+	$sol = inicializar_solucion();
+	$sol = recocido_simulado($sol);
+	$ids = mis_parejas($id,$sol);
+	
+	$rides = array();
+	foreach ($ids as $key => $val){
+		$rides[] = $data[$val];
+	}
+	
+	return $rides;
+	
+}
 
-$sol = inicializar_solucion();
-
-
-print_r($sol);
-$sol = recocido_simulado($sol);
-print_r($sol);
-
-costo_solucion($sol,1);
-
-
-exit;
-
+function mis_parejas($id,$solucion){
+	$ids = array();
+	foreach ($solucion['parejas'] as $key => $val){
+		if ($val['p'] == $id){
+			$ids[] = $val['c'];
+		}
+		if ($val['c'] == $id){
+			$ids[] = $val['p'];
+		}
+		
+	}
+	
+	return $ids;
+	
+}
 
 function inicializar_solucion(){
 	
