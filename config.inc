@@ -10,4 +10,15 @@ mysql_connect($hostname, $username, $password) or DIE('Connection to host is fai
 // Select the database
 mysql_select_db($dbname) or DIE('Database name is not available!');
 
+//util :)
+function query($sql){
+	$salida = array();
+	$resultado = mysql_query($sql);
+
+	while ($fila = mysql_fetch_assoc($resultado)) {
+		$salida[] = $fila;
+	} 
+	return $salida;
+}
+
 ?>

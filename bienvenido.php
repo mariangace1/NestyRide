@@ -249,7 +249,7 @@ header('Location: login.php');
                         Pasajero
                         </label>
                     </div>
-                    <?php echo"$rol";?>
+                    <?php //echo"$rol";?>
                     <div class="form-inline">
                         <h4>Lugares</h4>
                     <div class="col-xs-2">
