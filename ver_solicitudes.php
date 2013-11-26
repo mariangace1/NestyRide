@@ -89,6 +89,8 @@ $data = query($sql);
                   <th>#</th>
                   <th>Rol</th>
                   <th>Tiempo</th>
+                  <th>Origen</th>
+                  <th>Destino</th>
                   <th>opciones</th>
                 </tr>
               </thead>
@@ -98,6 +100,8 @@ $data = query($sql);
                   <td><?php echo $row['id']; ?></td>
                   <td><?php echo $row['rol']; ?></td>
                   <td><?php echo $row['tiempo']; ?></td>
+                  <td><?php echo $row['origen']; ?></td>
+                  <td><?php echo $row['destino']; ?></td>
                   <td><a href = "mis_rides.php?id=<?php echo $row['id']; ?>" > Encontrar match</a></td>
                   
                 </tr>

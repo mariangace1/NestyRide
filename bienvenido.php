@@ -178,7 +178,7 @@ header('Location: login.php');
             <li ><a href="ver_solicitudes.php">Mis solicitudes</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="../navbar-fixed-top/"><?php echo $_SESSION['username']; ?></a></li>
+            <li><a href="#"><?php echo $_SESSION['username']; ?></a></li>
             <li><a type="submit" class="btn btn-success" href="logout.php">Salir</a></li>
           </ul>
         </div><!--/.nav-collapse -->

@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
+    <link rel="shortcut icon" href="img/compass_64px.png">
 
-    <title>Jumbotron Template for Bootstrap</title>
+    <title>Nesty Ride</title>
 
     <!-- Bootstrap core CSS -->
     <link href="dist/css/bootstrap.css" rel="stylesheet">
@@ -56,8 +56,9 @@
     <div class="jumbotron">
       <div class="container">
         <h1>Nesty Ride</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        <p><a class="btn btn-primary btn-lg" role="button">Learn more »</a></p>
+        <p>La manera fácil de encontrar ride. De manera fácil y divertida. </p>
+         <p><img src="img/inicio.jpg" width="600" height="450"></p>
+        <p><a class="btn btn-primary btn-lg" role="button">Suscribirte aquí »</a></p>
       </div>
     </div>
 
@@ -79,7 +80,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="/dist/js/bootstrap.min.js"></script>
   
 
 </body></html>

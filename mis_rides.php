@@ -96,6 +96,8 @@ $rides = doitallandgivememyrides($id);
                   <th>#</th>
                   <th>Rol</th>
                   <th>Usuario</th>
+                  <th>Origen</th>
+                  <th>Destino</th>
                   <th>Hora</th>
                 </tr>
               </thead>
@@ -105,6 +107,8 @@ $rides = doitallandgivememyrides($id);
                   <td><?php echo $row['id']; ?></td>
                   <td><?php echo $row['rol']; ?></td>
                   <td><?php echo $row['usuario']; ?></td>
+                  <td><?php echo $row['origen']; ?></td>
+                  <td><?php echo $row['destino']; ?></td>
                   <td><?php echo $row['tiempo']; ?></td>
                   
                 </tr>
